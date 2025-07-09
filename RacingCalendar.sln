@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35122.118
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RacingCalendar.Web", "RacingCalendar.Web\RacingCalendar.Web.csproj", "{4B24D2A6-FFEA-4971-86DE-9DD1833B7BB4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{308E58C2-29D9-40F1-AA3B-C6F740929C2C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{C77A268A-3C5F-4A55-B222-163728389BDA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{30EFA65C-4340-4DEC-B352-7F2166FE379B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RacingCalendar.ViewModels", "RacingCalendar.ViewModels\RacingCalendar.ViewModels.csproj", "{4923D8CF-1B0D-444A-92BE-F80DF88740F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RacingCalendar.Services.Core", "RacingCalendar.Services.Core\RacingCalendar.Services.Core.csproj", "{376676B6-F708-432E-AAF7-0495F06D83AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RacingCalendar.Data", "RacingCalendar.Data\RacingCalendar.Data.csproj", "{6F9CD34E-07DD-48CA-8DB0-957997169D53}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RacingCalendar.Data.Models", "RacingCalendar.Data.Models\RacingCalendar.Data.Models.csproj", "{00F255B9-C2E9-408E-BF06-F32655DA4803}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4B24D2A6-FFEA-4971-86DE-9DD1833B7BB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B24D2A6-FFEA-4971-86DE-9DD1833B7BB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B24D2A6-FFEA-4971-86DE-9DD1833B7BB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B24D2A6-FFEA-4971-86DE-9DD1833B7BB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4923D8CF-1B0D-444A-92BE-F80DF88740F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4923D8CF-1B0D-444A-92BE-F80DF88740F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4923D8CF-1B0D-444A-92BE-F80DF88740F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4923D8CF-1B0D-444A-92BE-F80DF88740F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{376676B6-F708-432E-AAF7-0495F06D83AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{376676B6-F708-432E-AAF7-0495F06D83AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{376676B6-F708-432E-AAF7-0495F06D83AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{376676B6-F708-432E-AAF7-0495F06D83AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F9CD34E-07DD-48CA-8DB0-957997169D53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F9CD34E-07DD-48CA-8DB0-957997169D53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F9CD34E-07DD-48CA-8DB0-957997169D53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F9CD34E-07DD-48CA-8DB0-957997169D53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00F255B9-C2E9-408E-BF06-F32655DA4803}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00F255B9-C2E9-408E-BF06-F32655DA4803}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00F255B9-C2E9-408E-BF06-F32655DA4803}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00F255B9-C2E9-408E-BF06-F32655DA4803}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4B24D2A6-FFEA-4971-86DE-9DD1833B7BB4} = {308E58C2-29D9-40F1-AA3B-C6F740929C2C}
+		{4923D8CF-1B0D-444A-92BE-F80DF88740F4} = {308E58C2-29D9-40F1-AA3B-C6F740929C2C}
+		{376676B6-F708-432E-AAF7-0495F06D83AB} = {30EFA65C-4340-4DEC-B352-7F2166FE379B}
+		{6F9CD34E-07DD-48CA-8DB0-957997169D53} = {C77A268A-3C5F-4A55-B222-163728389BDA}
+		{00F255B9-C2E9-408E-BF06-F32655DA4803} = {C77A268A-3C5F-4A55-B222-163728389BDA}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1AEBDA75-1A32-49CC-85A6-A336C91177AA}
+	EndGlobalSection
+EndGlobal
