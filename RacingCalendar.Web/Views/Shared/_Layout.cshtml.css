@@ -46,3 +46,20 @@ button.accept-policy {
   white-space: nowrap;
   line-height: 60px;
 }
+
+.navbar-nav .nav-item:last-child {
+    margin-left: 10px;
+}
+
+.navbar-nav .nav-link[href*="Register"] {
+    background-color: #dc3545; /* Bootstrap danger red */
+    color: white !important;
+    border-radius: 4px;
+    padding: 5px 15px;
+}
+
+.navbar-nav .nav-link[href*="Login"] {
+    border: 1px solid #dc3545;
+    border-radius: 4px;
+    padding: 5px 15px;
+}
