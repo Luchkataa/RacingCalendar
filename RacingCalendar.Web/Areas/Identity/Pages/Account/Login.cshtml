@@ -8,33 +8,33 @@
     ViewBag.HideFooter = true;
 }   
 
-<div class="rc-login-container">
-    <div class="rc-login-box">
-        <div class="rc-login-header">
+<div class="auth-container">
+    <div class="auth-box">
+        <div class="auth-header">
             <h1>Sign In</h1>
         </div>
 
         <form id="account" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
 
-            <div class="rc-form-group">
+            <div class="auth-form-group">
                 <label asp-for="Input.Email">Email Address</label>
                 <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="Enter your username" />
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
 
-            <div class="rc-form-group">
+            <div class="auth-form-group">
                 <label asp-for="Input.Password">Password</label>
                 <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="Enter your password" />
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
-            <button id="login-submit" type="submit" class="rc-btn">Sign In</button>
-            <div class="rc-links">
+            <button id="login-submit" type="submit" class="auth-btn">Sign In</button>
+            <div class="auth-links">
                 <p>Don't have an account yet? <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register</a></p>
             </div>
         </form>
 
-        <div class="rc-footer">
+        <div class="auth-footer">
             <div class="rc-copyright">
                 © @DateTime.Now.Year - RacingCalendar.Web
             </div>
