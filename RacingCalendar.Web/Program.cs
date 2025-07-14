@@ -47,4 +47,10 @@ app.MapControllerRoute(
 
 app.MapRazorPages();
 
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    await RolesSeeder.SeedRolesAndAdminAsync(services);
+}
+
 app.Run();
