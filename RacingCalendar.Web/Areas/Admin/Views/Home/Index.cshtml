@@ -3,3 +3,17 @@
 }
 
 <h2>Welcome to the Admin Panel</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Circuits</h5>
+                <p class="card-text">Manage all racing circuits.</p>
+                <a href="@Url.Action("Index", "Circuits", new { area = "Admin" })" class="btn btn-primary">Manage Circuits</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- You can copy and paste this card structure for Races, Drivers, Teams, etc. in the future -->
+</div>
