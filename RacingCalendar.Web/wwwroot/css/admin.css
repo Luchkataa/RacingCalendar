@@ -1,0 +1,82 @@
+﻿.admin-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.admin-header {
+    color: #2c3e50;
+    margin-bottom: 2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e10600;
+}
+
+.admin-form .form-label {
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 0.5rem;
+}
+
+.admin-form .form-control {
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 0.5rem 0.75rem;
+    transition: all 0.3s;
+}
+
+    .admin-form .form-control:focus {
+        border-color: #e10600;
+        box-shadow: 0 0 0 0.25rem rgba(225, 6, 0, 0.1);
+    }
+
+.btn-admin {
+    padding: 0.5rem 1.5rem;
+    font-weight: 500;
+    transition: all 0.3s;
+    border-radius: 4px;
+}
+
+.btn-admin-primary {
+    background-color: #e10600;
+    border-color: #e10600;
+    color: white;
+}
+
+    .btn-admin-primary:hover {
+        background-color: #c10500;
+        border-color: #c10500;
+        transform: translateY(-2px);
+    }
+
+.btn-admin-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: white;
+}
+
+    .btn-admin-secondary:hover {
+        background-color: #5a6268;
+        border-color: #5a6268;
+        transform: translateY(-2px);
+    }
+
+.btn-admin-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: white;
+}
+
+    .btn-admin-danger:hover {
+        background-color: #c82333;
+        border-color: #bd2130;
+        transform: translateY(-2px);
+    }
+
+.validation-message {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
