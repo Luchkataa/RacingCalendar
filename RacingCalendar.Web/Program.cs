@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ICircuitService, CircuitService>();
 builder.Services.AddScoped<ISeriesService, SeriesService>();
+builder.Services.AddScoped<ITeamService, TeamService>();
 
 builder.Services.AddDbContext<RacingCalendarDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
