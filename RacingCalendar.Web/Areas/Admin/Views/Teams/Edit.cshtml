@@ -1,0 +1,32 @@
+﻿@model RacingCalendar.ViewModels.TeamViewModel
+@{
+    ViewData["Title"] = "Edit Team";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="admin-container">
+    <h2 class="admin-header mb-4">Edit Team</h2>
+
+    <form asp-action="Edit" method="post" class="admin-form">
+        <input type="hidden" asp-for="Id" />
+
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Country" class="form-label"></label>
+            <input asp-for="Country" class="form-control" />
+            <span asp-validation-for="Country" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-admin btn-admin-primary">Save</button>
+        <a asp-action="Index" class="btn btn-secondary ms-2">Cancel</a>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
