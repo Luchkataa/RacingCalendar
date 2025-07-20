@@ -20,6 +20,10 @@ namespace RacingCalendar.Data.Models
         [StringLength(50)]
         public string Nationality { get; set; }
 
+        [Url]
+        [Display(Name = "Image URL")]
+        public string? DriverImageUrl { get; set; }
+
         public int? TeamId { get; set; }
         public Team? Team { get; set; }
         public ICollection<DriverRace> RaceEntries { get; set; } = new List<DriverRace>();
