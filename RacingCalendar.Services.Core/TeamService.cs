@@ -3,6 +3,7 @@ using RacingCalendar.Data;
 using RacingCalendar.Data.Models;
 using RacingCalendar.Services.Core.Contracts;
 using RacingCalendar.ViewModels;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace RacingCalendar.Services.Core
 {
@@ -68,6 +69,18 @@ namespace RacingCalendar.Services.Core
 
             _context.Teams.Remove(team);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<SelectListItem>> GetTeamsSelectListAsync()
+        {
+            return await _context.Teams
+                .OrderBy(t => t.Name)
+                .Select(t => new SelectListItem
+                {
+                    Value = t.Id.ToString(),
+                    Text = t.Name
+                })
+                .ToListAsync();
         }
     }
 }

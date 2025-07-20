@@ -1,0 +1,50 @@
+﻿@model IEnumerable<RacingCalendar.ViewModels.DriverViewModel>
+
+@{
+    ViewData["Title"] = "Drivers";
+}
+
+<h2>Drivers</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Add New Driver</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Photo</th>
+            <th>Name</th>
+            <th>Nationality</th>
+            <th>Team</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var driver in Model)
+        {
+            <tr>
+                <td>
+                    @if (!string.IsNullOrEmpty(driver.DriverImageUrl))
+                    {
+                        <img src="@driver.DriverImageUrl" alt="@driver.FullName photo" style="width: 80px; height: auto;" />
+                    }
+                    else
+                    {
+                        <span class="text-muted">No image</span>
+                    }
+                </td>
+                <td>@driver.FullName</td>
+                <td>@driver.Nationality</td>
+                <td>@driver.TeamName</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@driver.Id" class="btn btn-sm btn-warning">Edit</a>
+                    <form asp-action="Delete" asp-route-id="@driver.Id" method="post" style="display:inline;"
+                          onsubmit="return confirm('Are you sure you want to delete this driver?');">
+                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

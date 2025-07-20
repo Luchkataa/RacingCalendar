@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace RacingCalendar.ViewModels
 {
@@ -28,5 +29,7 @@ namespace RacingCalendar.ViewModels
         [Url]
         [Display(Name = "Image URL")]
         public string? DriverImageUrl { get; set; }
+
+        public IEnumerable<SelectListItem> Teams { get; set; } = Enumerable.Empty<SelectListItem>();
     }
 }

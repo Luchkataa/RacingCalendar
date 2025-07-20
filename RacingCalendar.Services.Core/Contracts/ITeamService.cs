@@ -1,4 +1,5 @@
 ﻿using RacingCalendar.ViewModels;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace RacingCalendar.Services.Core.Contracts
 {
@@ -9,5 +10,6 @@ namespace RacingCalendar.Services.Core.Contracts
         Task AddAsync(TeamViewModel vm);
         Task UpdateAsync(TeamViewModel vm);
         Task DeleteAsync(int id);
+        Task<IEnumerable<SelectListItem>> GetTeamsSelectListAsync();
     }
 }

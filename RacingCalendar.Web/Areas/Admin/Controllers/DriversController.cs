@@ -10,10 +10,12 @@ namespace RacingCalendar.Web.Areas.Admin.Controllers
     public class DriversController : Controller
     {
         private readonly IDriverService _driverService;
+        private readonly ITeamService _teamService;
 
-        public DriversController(IDriverService driverService)
+        public DriversController(IDriverService driverService, ITeamService teamService)
         {
             _driverService = driverService;
+            _teamService = teamService;
         }
 
         public async Task<IActionResult> Index()
@@ -24,14 +26,19 @@ namespace RacingCalendar.Web.Areas.Admin.Controllers
 
         public async Task<IActionResult> Create()
         {
-            return View();
+            var model = new DriverViewModel();
+            model.Teams = await _teamService.GetTeamsSelectListAsync();
+            return View(model);
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(DriverViewModel model)
         {
             if (!ModelState.IsValid)
+            {
+                model.Teams = await _teamService.GetTeamsSelectListAsync();
                 return View(model);
+            }
 
             await _driverService.AddAsync(model);
             return RedirectToAction(nameof(Index));
@@ -43,6 +50,7 @@ namespace RacingCalendar.Web.Areas.Admin.Controllers
             if (driver == null)
                 return NotFound();
 
+            driver.Teams = await _teamService.GetTeamsSelectListAsync();
             return View(driver);
         }
 
@@ -50,7 +58,10 @@ namespace RacingCalendar.Web.Areas.Admin.Controllers
         public async Task<IActionResult> Edit(DriverViewModel model)
         {
             if (!ModelState.IsValid)
+            {
+                model.Teams = await _teamService.GetTeamsSelectListAsync();
                 return View(model);
+            }
 
             await _driverService.UpdateAsync(model);
             return RedirectToAction(nameof(Index));

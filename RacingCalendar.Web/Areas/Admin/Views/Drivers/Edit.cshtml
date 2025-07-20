@@ -1,0 +1,43 @@
+﻿@model RacingCalendar.ViewModels.DriverViewModel
+
+@{
+    ViewData["Title"] = "Edit Driver";
+}
+
+<h2>Edit Driver</h2>
+
+<form asp-action="Edit">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="FullName"></label>
+        <input asp-for="FullName" class="form-control" />
+        <span asp-validation-for="FullName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Nationality"></label>
+        <input asp-for="Nationality" class="form-control" />
+        <span asp-validation-for="Nationality" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="TeamId"></label>
+        <select asp-for="TeamId" asp-items="Model.Teams" class="form-control">
+            <option value="">-- Select Team --</option>
+        </select>
+        <span asp-validation-for="TeamId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DriverImageUrl"></label>
+        <input asp-for="DriverImageUrl" class="form-control" />
+        <span asp-validation-for="DriverImageUrl" class="text-danger"></span>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-success">Save Changes</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
