@@ -1,41 +1,51 @@
 ﻿@model RacingCalendar.ViewModels.DriverViewModel
-
 @{
     ViewData["Title"] = "Edit Driver";
     Layout = "/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit Driver</h2>
+<div class="admin-container">
+    <h2 class="admin-header">Edit Driver</h2>
 
-<form asp-action="Edit">
-    <input type="hidden" asp-for="Id" />
+    <form asp-action="Edit" method="post" class="admin-form">
+        <input type="hidden" asp-for="Id" />
 
-    <div class="form-group">
-        <label asp-for="FullName"></label>
-        <input asp-for="FullName" class="form-control" />
-        <span asp-validation-for="FullName" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Nationality"></label>
-        <input asp-for="Nationality" class="form-control" />
-        <span asp-validation-for="Nationality" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="TeamId"></label>
-        <select asp-for="TeamId" asp-items="Model.Teams" class="form-control">
-            <option value="">-- Select Team --</option>
-        </select>
-        <span asp-validation-for="TeamId" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="DriverImageUrl"></label>
-        <input asp-for="DriverImageUrl" class="form-control" />
-        <span asp-validation-for="DriverImageUrl" class="text-danger"></span>
-    </div>
-    <br />
-    <button type="submit" class="btn btn-success">Save Changes</button>
-    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
-</form>
+        <div class="mb-4">
+            <label asp-for="FullName" class="form-label"></label>
+            <input asp-for="FullName" class="form-control" />
+            <span asp-validation-for="FullName" class="validation-message"></span>
+        </div>
+
+        <div class="mb-4">
+            <label asp-for="Nationality" class="form-label"></label>
+            <input asp-for="Nationality" class="form-control" />
+            <span asp-validation-for="Nationality" class="validation-message"></span>
+        </div>
+
+        <div class="mb-4">
+            <label asp-for="TeamId" class="form-label">Team</label>
+            <select asp-for="TeamId" asp-items="Model.Teams" class="form-control">
+                <option value="">-- Select Team --</option>
+            </select>
+            <span asp-validation-for="TeamId" class="validation-message"></span>
+        </div>
+
+        <div class="mb-4">
+            <label asp-for="DriverImageUrl" class="form-label">Driver Image URL</label>
+            <input asp-for="DriverImageUrl" class="form-control" placeholder="https://example.com/image.jpg" />
+            <span asp-validation-for="DriverImageUrl" class="validation-message"></span>
+        </div>
+
+        <div class="d-flex gap-3">
+            <button type="submit" class="btn btn-admin btn-admin-primary">
+                <i class="fas fa-save me-1"></i> Update Driver
+            </button>
+            <a asp-action="Index" class="btn btn-admin btn-admin-secondary">
+                <i class="fas fa-times me-1"></i> Cancel
+            </a>
+        </div>
+    </form>
+</div>
 
 @section Scripts {
     @{

@@ -165,3 +165,54 @@
     padding: 0.25rem 0.75rem;
     font-size: 0.875rem;
 }
+
+.driver-hero-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+    .driver-hero-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+.driver-hero-image {
+    height: 200px;
+    background-color: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.driver-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.driver-placeholder {
+    font-size: 5rem;
+    color: #dee2e6;
+}
+
+.driver-hero-content {
+    padding: 1.25rem;
+}
+
+    .driver-hero-content h5 {
+        color: #2c3e50;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+.driver-hero-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
