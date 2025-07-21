@@ -1,0 +1,58 @@
+﻿@model RacingCalendar.ViewModels.RaceViewModel
+@{
+    ViewData["Title"] = "Edit Race";
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/admin.css" asp-append-version="true" />
+
+<div class="admin-container">
+    <h2 class="admin-header">
+        <i class="fas fa-flag-checkered me-2"></i>Edit Race
+    </h2>
+
+    <form asp-action="Edit" method="post" class="admin-form">
+        <input type="hidden" asp-for="Id" />
+
+        <div class="mb-4">
+            <label asp-for="Name" class="form-label">Race Name</label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="validation-message"></span>
+        </div>
+
+        <div class="mb-4">
+            <label asp-for="Date" class="form-label">Race Date</label>
+            <input asp-for="Date" class="form-control" type="date" />
+            <span asp-validation-for="Date" class="validation-message"></span>
+        </div>
+
+        <div class="mb-4">
+            <label asp-for="SeriesId" class="form-label">Series</label>
+            <select asp-for="SeriesId" class="form-select" asp-items="Model.SeriesOptions">
+                <option value="">-- Select Series --</option>
+            </select>
+            <span asp-validation-for="SeriesId" class="validation-message"></span>
+        </div>
+
+        <div class="mb-4">
+            <label asp-for="CircuitId" class="form-label">Circuit</label>
+            <select asp-for="CircuitId" class="form-select" asp-items="Model.CircuitOptions">
+                <option value="">-- Select Circuit --</option>
+            </select>
+            <span asp-validation-for="CircuitId" class="validation-message"></span>
+        </div>
+
+        <div class="d-flex gap-3">
+            <button type="submit" class="btn btn-admin btn-admin-primary">
+                <i class="fas fa-save me-1"></i> Save Changes
+            </button>
+            <a asp-action="Index" class="btn btn-admin btn-admin-secondary">
+                <i class="fas fa-times me-1"></i> Cancel
+            </a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

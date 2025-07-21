@@ -1,0 +1,62 @@
+﻿@model IEnumerable<RacingCalendar.ViewModels.RaceViewModel>
+@{
+    ViewData["Title"] = "Races";
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/admin.css" asp-append-version="true" />
+
+<div class="racing-container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="racing-header">
+            <i class="fas fa-flag-checkered me-2"></i>All Races
+        </h2>
+        <a asp-action="Create" class="btn btn-racing-primary">
+            <i class="fas fa-plus me-1"></i> Add New Race
+        </a>
+    </div>
+
+    <div class="racing-table-container">
+        <table class="racing-table">
+            <thead>
+                <tr>
+                    <th>Race Name</th>
+                    <th>Date</th>
+                    <th>Series</th>
+                    <th>Circuit</th>
+                    <th class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var race in Model)
+                {
+                    <tr>
+                        <td class="fw-semibold">
+                            <i class="fas fa-flag me-2 text-danger"></i>@race.Name
+                        </td>
+                        <td>
+                            <span class="racing-date-badge">
+                                @race.Date.ToString("MMM dd, yyyy")
+                            </span>
+                        </td>
+                        <td>@race.SeriesName</td>
+                        <td>@race.CircuitName</td>
+                        <td class="text-end">
+                            <div class="d-flex gap-2 justify-content-end">
+                                <a asp-action="Edit" asp-route-id="@race.Id" class="btn btn-racing-warning btn-sm">
+                                    <i class="fas fa-edit"></i> Edit
+                                </a>
+                                <form asp-action="Delete" asp-route-id="@race.Id" method="post"
+                                      onsubmit="return confirm('Delete @race.Name on @race.Date.ToString("MMM dd")?');">
+                                    <button type="submit" class="btn btn-racing-danger btn-sm">
+                                        <i class="fas fa-trash-alt"></i> Delete
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
