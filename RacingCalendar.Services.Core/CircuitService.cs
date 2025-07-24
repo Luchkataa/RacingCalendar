@@ -74,5 +74,28 @@ namespace RacingCalendar.Services.Core
             _context.Circuits.Remove(circuit);
             await _context.SaveChangesAsync();
         }
+        public async Task<PaginatedList<CircuitViewModel>> GetAllPaginatedAsync(int pageIndex, int pageSize)
+        {
+            var query = _context.Circuits.AsQueryable();
+
+            var totalCount = await query.CountAsync();
+
+            var circuits = await query
+                .OrderBy(c => c.Name)
+                .Skip((pageIndex - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            var items = circuits.Select(c => new CircuitViewModel
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Country = c.Country,
+                LayoutImageUrl = c.LayoutImageUrl
+            });
+
+            return new PaginatedList<CircuitViewModel>(items, totalCount, pageIndex, pageSize);
+        }
+
     }
 }

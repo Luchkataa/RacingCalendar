@@ -1,4 +1,4 @@
-﻿@model IEnumerable<RacingCalendar.ViewModels.CircuitViewModel>
+﻿@model RacingCalendar.ViewModels.PaginatedList<RacingCalendar.ViewModels.CircuitViewModel>
 @{
     ViewData["Title"] = "Manage Circuits";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -19,13 +19,15 @@
 
 <div class="container-fluid px-4 py-3">
     <div class="row g-4">
-        @foreach (var circuit in Model)
+        @foreach (var circuit in Model.Items)
         {
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
                 <div class="circuit-hero-card">
                     @if (!string.IsNullOrEmpty(circuit.LayoutImageUrl))
                     {
-                        <div class="circuit-hero-image" style="background-image: url('@circuit.LayoutImageUrl')"></div>
+                        <div class="circuit-hero-image"
+                             style="background-image: url('@Url.Content(circuit.LayoutImageUrl)')">
+                        </div>
                     }
                     else
                     {
@@ -52,6 +54,49 @@
             </div>
         }
     </div>
+
+    <div class="d-flex justify-content-center mt-4">
+        <nav>
+            <ul class="pagination">
+                @if (Model.HasPreviousPage)
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-action="Index" asp-route-page="@(Model.PageIndex - 1)">Previous</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item disabled"><span class="page-link">Previous</span></li>
+                }
+
+                @for (int i = 1; i <= Model.TotalPages; i++)
+                {
+                    if (i == Model.PageIndex)
+                    {
+                        <li class="page-item active"><span class="page-link">@i</span></li>
+                    }
+                    else
+                    {
+                        <li class="page-item">
+                            <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
+                        </li>
+                    }
+                }
+
+                @if (Model.HasNextPage)
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-action="Index" asp-route-page="@(Model.PageIndex + 1)">Next</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item disabled"><span class="page-link">Next</span></li>
+                }
+            </ul>
+        </nav>
+    </div>
+
 </div>
 
 <style>

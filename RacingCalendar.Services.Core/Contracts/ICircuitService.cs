@@ -15,5 +15,7 @@ namespace RacingCalendar.Services.Core.Contracts
         Task AddAsync(CircuitViewModel circuit);
         Task UpdateAsync(CircuitViewModel circuit);
         Task DeleteAsync(int id);
+        Task<PaginatedList<CircuitViewModel>> GetAllPaginatedAsync(int pageIndex, int pageSize);
+
     }
 }
