@@ -1,22 +1,33 @@
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-  margin-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+    padding-bottom: 60px;
+}
+
+.footer {
+    height: 60px;
+    line-height: 60px;
+    background: white;
+    border-top: 1px solid #dee2e6;
+    width: 100%;
+    text-align: center;
+    position: fixed;
+    bottom: -60px;
+    transition: bottom 0.3s ease-in-out;
+    z-index: 1000;
+}
+
+body.scrolled-to-bottom .footer {
+    bottom: 0;
 }
