@@ -114,8 +114,7 @@ namespace RacingCalendar.Services.Core
                     Text = c.Name
                 }).ToListAsync();
         }
-
-        public async Task<PaginatedList<RaceViewModel>> GetAllPaginatedAsync(int pageIndex, int pageSize, string? searchTerm = null)
+        public async Task<PaginatedList<RaceViewModel>> GetAllPaginatedAsync(int pageIndex, int pageSize, string? searchTerm = null, int? seriesId = null)
         {
             var query = _context.Races
                 .Include(r => r.Series)
@@ -128,6 +127,11 @@ namespace RacingCalendar.Services.Core
                     r.Name.Contains(searchTerm) ||
                     r.Series.Name.Contains(searchTerm) ||
                     r.Circuit.Name.Contains(searchTerm));
+            }
+
+            if (seriesId.HasValue)
+            {
+                query = query.Where(r => r.SeriesId == seriesId.Value);
             }
 
             var totalCount = await query.CountAsync();
@@ -143,6 +147,8 @@ namespace RacingCalendar.Services.Core
                 Id = r.Id,
                 Name = r.Name,
                 Date = r.Date,
+                SeriesId = r.SeriesId,
+                CircuitId = r.CircuitId,
                 SeriesName = r.Series.Name,
                 CircuitName = r.Circuit.Name
             });

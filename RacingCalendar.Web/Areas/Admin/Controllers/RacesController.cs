@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using RacingCalendar.Data.Models;
 using RacingCalendar.Services.Core.Contracts;
 using RacingCalendar.ViewModels;
 
@@ -16,11 +17,16 @@ namespace RacingCalendar.Web.Areas.Admin.Controllers
             _raceService = raceService;
         }
 
-        public async Task<IActionResult> Index(string? searchTerm, int page = 1)
+        public async Task<IActionResult> Index(string? searchTerm, int? seriesId, int page = 1)
         {
             int pageSize = 10;
-            var races = await _raceService.GetAllPaginatedAsync(page, pageSize, searchTerm);
+
+            var races = await _raceService.GetAllPaginatedAsync(page, pageSize, searchTerm, seriesId);
+
             ViewBag.SearchTerm = searchTerm;
+            ViewBag.SeriesId = seriesId;
+            ViewBag.SeriesOptions = await _raceService.GetSeriesSelectListAsync();
+
             return View(races);
         }
 
