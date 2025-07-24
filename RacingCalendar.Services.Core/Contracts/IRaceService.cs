@@ -10,6 +10,7 @@ namespace RacingCalendar.Services.Core.Contracts
         Task AddAsync(RaceViewModel model);
         Task UpdateAsync(RaceViewModel model);
         Task DeleteAsync(int id);
+        Task<PaginatedList<RaceViewModel>> GetAllPaginatedAsync(int pageIndex, int pageSize, string? searchTerm = null);
 
         Task<IEnumerable<SelectListItem>> GetSeriesSelectListAsync();
         Task<IEnumerable<SelectListItem>> GetCircuitsSelectListAsync();

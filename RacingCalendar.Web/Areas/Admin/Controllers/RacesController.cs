@@ -16,9 +16,11 @@ namespace RacingCalendar.Web.Areas.Admin.Controllers
             _raceService = raceService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? searchTerm, int page = 1)
         {
-            var races = await _raceService.GetAllAsync();
+            int pageSize = 10;
+            var races = await _raceService.GetAllPaginatedAsync(page, pageSize, searchTerm);
+            ViewBag.SearchTerm = searchTerm;
             return View(races);
         }
 

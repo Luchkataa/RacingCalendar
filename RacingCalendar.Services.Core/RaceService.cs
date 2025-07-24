@@ -114,5 +114,40 @@ namespace RacingCalendar.Services.Core
                     Text = c.Name
                 }).ToListAsync();
         }
+
+        public async Task<PaginatedList<RaceViewModel>> GetAllPaginatedAsync(int pageIndex, int pageSize, string? searchTerm = null)
+        {
+            var query = _context.Races
+                .Include(r => r.Series)
+                .Include(r => r.Circuit)
+                .AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                query = query.Where(r =>
+                    r.Name.Contains(searchTerm) ||
+                    r.Series.Name.Contains(searchTerm) ||
+                    r.Circuit.Name.Contains(searchTerm));
+            }
+
+            var totalCount = await query.CountAsync();
+
+            var races = await query
+                .OrderBy(r => r.Date)
+                .Skip((pageIndex - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            var items = races.Select(r => new RaceViewModel
+            {
+                Id = r.Id,
+                Name = r.Name,
+                Date = r.Date,
+                SeriesName = r.Series.Name,
+                CircuitName = r.Circuit.Name
+            });
+
+            return new PaginatedList<RaceViewModel>(items, totalCount, pageIndex, pageSize);
+        }
     }
 }
