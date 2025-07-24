@@ -308,3 +308,91 @@
         margin-bottom: 0;
         opacity: 0.9;
     }
+
+.admin-header-full {
+    background: #2c3e50;
+    color: white;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.circuit-hero-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+    .circuit-hero-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+.circuit-hero-image {
+    height: 180px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.circuit-hero-content {
+    padding: 1.25rem;
+}
+
+    .circuit-hero-content h5 {
+        color: #2c3e50;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+.circuit-hero-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.btn-admin-edit {
+    background: #ffc107;
+    color: #212529;
+    border: none;
+}
+
+.btn-admin-delete {
+    background: #dc3545;
+    color: white;
+    border: none;
+}
+
+.pagination .page-item.disabled .page-link {
+    pointer-events: none;
+    cursor: default;
+    color: #6c757d;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: white;
+}
+
+.search-container {
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+}
+
+.input-group-text {
+    transition: all 0.3s ease;
+}
+
+.input-group:focus-within .input-group-text {
+    border-color: #258cfb;
+    color: #258cfb;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #ced4da;
+}

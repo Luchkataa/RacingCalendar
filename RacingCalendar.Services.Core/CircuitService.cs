@@ -74,9 +74,14 @@ namespace RacingCalendar.Services.Core
             _context.Circuits.Remove(circuit);
             await _context.SaveChangesAsync();
         }
-        public async Task<PaginatedList<CircuitViewModel>> GetAllPaginatedAsync(int pageIndex, int pageSize)
+        public async Task<PaginatedList<CircuitViewModel>> GetAllPaginatedAsync(int pageIndex, int pageSize, string? searchTerm = null)
         {
             var query = _context.Circuits.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                query = query.Where(c => c.Name.Contains(searchTerm) || c.Country.Contains(searchTerm));
+            }
 
             var totalCount = await query.CountAsync();
 
@@ -96,6 +101,5 @@ namespace RacingCalendar.Services.Core
 
             return new PaginatedList<CircuitViewModel>(items, totalCount, pageIndex, pageSize);
         }
-
     }
 }

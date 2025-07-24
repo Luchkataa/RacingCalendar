@@ -1,4 +1,5 @@
 ﻿@model RacingCalendar.ViewModels.PaginatedList<RacingCalendar.ViewModels.CircuitViewModel>
+
 @{
     ViewData["Title"] = "Manage Circuits";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -16,7 +17,29 @@
         </div>
     </div>
 </div>
-
+<div class="search-container bg-light py-3 mb-4 shadow-sm">
+    <div class="container-fluid">
+        <form method="get" class="row g-2 align-items-center" asp-action="Index">
+            <div class="col-md-8 col-lg-9">
+                <div class="input-group">
+                    <span class="input-group-text bg-white border-end-0">
+                        <i class="fas fa-search text-muted"></i>
+                    </span>
+                    <input type="text"
+                           name="searchTerm"
+                           value="@Context.Request.Query["searchTerm"]"
+                           placeholder="Search circuits by name or country..."
+                           class="form-control border-start-0" />
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-3">
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="fas fa-search me-2"></i>Search
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
 <div class="container-fluid px-4 py-3">
     <div class="row g-4">
         @foreach (var circuit in Model.Items)
@@ -25,9 +48,7 @@
                 <div class="circuit-hero-card">
                     @if (!string.IsNullOrEmpty(circuit.LayoutImageUrl))
                     {
-                        <div class="circuit-hero-image"
-                             style="background-image: url('@Url.Content(circuit.LayoutImageUrl)')">
-                        </div>
+                        <div class="circuit-hero-image" style="background-image: url('@circuit.LayoutImageUrl')"></div>
                     }
                     else
                     {
@@ -55,104 +76,37 @@
         }
     </div>
 
-    <div class="d-flex justify-content-center mt-4">
-        <nav>
-            <ul class="pagination">
-                @if (Model.HasPreviousPage)
-                {
-                    <li class="page-item">
-                        <a class="page-link" asp-action="Index" asp-route-page="@(Model.PageIndex - 1)">Previous</a>
-                    </li>
-                }
-                else
-                {
-                    <li class="page-item disabled"><span class="page-link">Previous</span></li>
-                }
+    <nav aria-label="Page navigation" class="mt-4">
+        <ul class="pagination justify-content-center">
+            <li class="page-item @(Model.HasPreviousPage ? "" : "disabled")">
+                <a class="page-link"
+                   asp-action="Index"
+                   asp-route-page="@(Model.PageIndex - 1)"
+                   asp-route-searchTerm="@Context.Request.Query["searchTerm"]">
+                    Previous
+                </a>
+            </li>
 
-                @for (int i = 1; i <= Model.TotalPages; i++)
-                {
-                    if (i == Model.PageIndex)
-                    {
-                        <li class="page-item active"><span class="page-link">@i</span></li>
-                    }
-                    else
-                    {
-                        <li class="page-item">
-                            <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
-                        </li>
-                    }
-                }
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                <li class="page-item @(i == Model.PageIndex ? "active" : "")">
+                    <a class="page-link"
+                       asp-action="Index"
+                       asp-route-page="@i"
+                       asp-route-searchTerm="@Context.Request.Query["searchTerm"]">
+                        @i
+                    </a>
+                </li>
+            }
 
-                @if (Model.HasNextPage)
-                {
-                    <li class="page-item">
-                        <a class="page-link" asp-action="Index" asp-route-page="@(Model.PageIndex + 1)">Next</a>
-                    </li>
-                }
-                else
-                {
-                    <li class="page-item disabled"><span class="page-link">Next</span></li>
-                }
-            </ul>
-        </nav>
-    </div>
-
+            <li class="page-item @(Model.HasNextPage ? "" : "disabled")">
+                <a class="page-link"
+                   asp-action="Index"
+                   asp-route-page="@(Model.PageIndex + 1)"
+                   asp-route-searchTerm="@Context.Request.Query["searchTerm"]">
+                    Next
+                </a>
+            </li>
+        </ul>
+    </nav>
 </div>
-
-<style>
-    .admin-header-full {
-        background: #2c3e50;
-        color: white;
-        margin-bottom: 2rem;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-
-    .circuit-hero-card {
-        background: white;
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-        transition: all 0.3s ease;
-        height: 100%;
-    }
-
-        .circuit-hero-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-        }
-
-    .circuit-hero-image {
-        height: 180px;
-        background-size: cover;
-        background-position: center;
-        position: relative;
-    }
-
-    .circuit-hero-content {
-        padding: 1.25rem;
-    }
-
-        .circuit-hero-content h5 {
-            color: #2c3e50;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-    .circuit-hero-actions {
-        display: flex;
-        gap: 0.5rem;
-        margin-top: 1rem;
-    }
-
-    .btn-admin-edit {
-        background: #ffc107;
-        color: #212529;
-        border: none;
-    }
-
-    .btn-admin-delete {
-        background: #dc3545;
-        color: white;
-        border: none;
-    }
-</style>
