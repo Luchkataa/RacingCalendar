@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using RacingCalendar.Services.Core.Contracts;
 using RacingCalendar.ViewModels;
 
@@ -18,10 +19,11 @@ namespace RacingCalendar.Web.Areas.Admin.Controllers
             _teamService = teamService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1, string? searchTerm = null)
         {
-            var drivers = await _driverService.GetAllAsync();
-            return View(drivers);
+            int pageSize = 8;
+            var paginatedDrivers = await _driverService.GetAllPaginatedAsync(page, pageSize, searchTerm);
+            return View(paginatedDrivers);
         }
 
         public async Task<IActionResult> Create()
@@ -73,5 +75,6 @@ namespace RacingCalendar.Web.Areas.Admin.Controllers
             await _driverService.DeleteAsync(id);
             return RedirectToAction(nameof(Index));
         }
+
     }
 }

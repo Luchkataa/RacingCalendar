@@ -77,5 +77,35 @@ namespace RacingCalendar.Services.Core
             _context.Drivers.Remove(driver);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<PaginatedList<DriverViewModel>> GetAllPaginatedAsync(int pageIndex, int pageSize, string? searchTerm = null)
+        {
+            var query = _context.Drivers.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                query = query.Where(d => d.FullName.Contains(searchTerm) || d.Team.Name.Contains(searchTerm));
+            }
+
+            var totalCount = await query.CountAsync();
+
+            var drivers = await query
+                .Include(d => d.Team)
+                .OrderBy(d => d.FullName)
+                .Skip((pageIndex - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            var items = drivers.Select(d => new DriverViewModel
+            {
+                Id = d.Id,
+                FullName = d.FullName,
+                TeamName = d.Team?.Name,
+                DriverImageUrl = d.DriverImageUrl
+            }); 
+
+            return new PaginatedList<DriverViewModel>(items, totalCount, pageIndex, pageSize);
+        }
+
     }
 }

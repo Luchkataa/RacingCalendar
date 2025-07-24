@@ -14,5 +14,6 @@ namespace RacingCalendar.Services.Core.Contracts
         Task AddAsync(DriverViewModel driver);
         Task UpdateAsync(DriverViewModel driver);
         Task DeleteAsync(int id);
+        Task<PaginatedList<DriverViewModel>> GetAllPaginatedAsync(int pageIndex, int pageSize, string? searchTerm = null);
     }
 }
