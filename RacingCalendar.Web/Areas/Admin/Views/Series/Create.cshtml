@@ -9,6 +9,7 @@
     <h2 class="admin-header">Add New Series</h2>
 
     <form asp-action="Create" method="post" class="admin-form">
+        @Html.AntiForgeryToken()
         <div class="mb-4">
             <label asp-for="Name" class="form-label"></label>
             <input asp-for="Name" class="form-control" />

@@ -34,6 +34,7 @@ namespace RacingCalendar.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(DriverViewModel model)
         {
             if (!ModelState.IsValid)
@@ -57,6 +58,7 @@ namespace RacingCalendar.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(DriverViewModel model)
         {
             if (!ModelState.IsValid)
@@ -70,6 +72,7 @@ namespace RacingCalendar.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
             await _driverService.DeleteAsync(id);

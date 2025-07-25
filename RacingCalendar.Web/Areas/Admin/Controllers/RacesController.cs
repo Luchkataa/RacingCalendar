@@ -42,6 +42,7 @@ namespace RacingCalendar.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(RaceViewModel model)
         {
             if (!ModelState.IsValid)
@@ -67,6 +68,7 @@ namespace RacingCalendar.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(RaceViewModel model)
         {
             if (!ModelState.IsValid)
@@ -81,6 +83,7 @@ namespace RacingCalendar.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
             await _raceService.DeleteAsync(id);

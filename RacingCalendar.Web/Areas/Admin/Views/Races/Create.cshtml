@@ -12,6 +12,7 @@
     </h2>
 
     <form asp-action="Create" method="post" class="admin-form">
+        @Html.AntiForgeryToken()
         <div class="mb-4">
             <label asp-for="Name" class="form-label">Race Name</label>
             <input asp-for="Name" class="form-control" placeholder="Enter race name" />
