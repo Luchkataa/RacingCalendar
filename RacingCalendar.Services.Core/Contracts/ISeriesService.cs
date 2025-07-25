@@ -14,5 +14,6 @@ namespace RacingCalendar.Services.Core.Contracts
         Task AddAsync(SeriesViewModel model);
         Task UpdateAsync(SeriesViewModel model);
         Task DeleteAsync(int id);
+        Task<PaginatedList<SeriesViewModel>> GetPaginatedAsync(string searchTerm, int pageIndex, int pageSize);
     }
 }

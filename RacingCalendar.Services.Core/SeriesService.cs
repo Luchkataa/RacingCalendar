@@ -69,5 +69,30 @@ namespace RacingCalendar.Services.Core
             _context.Series.Remove(entity);
             await _context.SaveChangesAsync();
         }
+        public async Task<PaginatedList<SeriesViewModel>> GetPaginatedAsync(string searchTerm, int pageIndex, int pageSize)
+        {
+            var query = _context.Series.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                query = query.Where(s => s.Name.Contains(searchTerm));
+            }
+
+            var totalCount = await query.CountAsync();
+
+            var items = await query
+                .OrderBy(s => s.Name)
+                .Skip((pageIndex - 1) * pageSize)
+                .Take(pageSize)
+                .Select(s => new SeriesViewModel
+                {
+                    Id = s.Id,
+                    Name = s.Name,
+                    Description = s.Description
+                })
+                .ToListAsync();
+
+            return new PaginatedList<SeriesViewModel>(items, totalCount, pageIndex, pageSize);
+        }
     }
 }
