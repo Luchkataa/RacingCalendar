@@ -82,5 +82,31 @@ namespace RacingCalendar.Services.Core
                 })
                 .ToListAsync();
         }
+        public async Task<PaginatedList<TeamViewModel>> GetPaginatedTeamsAsync(string searchTerm, int page, int pageSize)
+        {
+            var query = _context.Teams.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                query = query.Where(t => t.Name.Contains(searchTerm) || t.Country.Contains(searchTerm));
+            }
+
+            var totalCount = await query.CountAsync();
+
+            var items = await query
+                .OrderBy(t => t.Name)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .Select(t => new TeamViewModel
+                {
+                    Id = t.Id,
+                    Name = t.Name,
+                    Country = t.Country
+                })
+                .ToListAsync();
+
+            return new PaginatedList<TeamViewModel>(items, totalCount, page, pageSize);
+        }
+
     }
 }

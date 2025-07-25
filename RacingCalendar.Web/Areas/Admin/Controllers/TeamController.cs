@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using RacingCalendar.Services.Core.Contracts;
 using RacingCalendar.ViewModels;
+using System.Drawing.Printing;
 
 namespace RacingCalendar.Web.Areas.Admin.Controllers
 {
@@ -16,9 +17,11 @@ namespace RacingCalendar.Web.Areas.Admin.Controllers
             _teamService = teamService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchTerm, int page = 1)
         {
-            var teams = await _teamService.GetAllAsync();
+            int pageSize = 10;
+            var teams = await _teamService.GetPaginatedTeamsAsync(searchTerm, page, pageSize);
+            ViewBag.SearchTerm = searchTerm;
             return View(teams);
         }
 
@@ -28,6 +31,7 @@ namespace RacingCalendar.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(TeamViewModel model)
         {
             if (!ModelState.IsValid) return View(model);
@@ -45,6 +49,7 @@ namespace RacingCalendar.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(TeamViewModel model)
         {
             if (!ModelState.IsValid) return View(model);
@@ -62,6 +67,7 @@ namespace RacingCalendar.Web.Areas.Admin.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             await _teamService.DeleteAsync(id);

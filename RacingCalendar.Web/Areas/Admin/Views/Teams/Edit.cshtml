@@ -8,6 +8,7 @@
     <h2 class="admin-header mb-4">Edit Team</h2>
 
     <form asp-action="Edit" method="post" class="admin-form">
+        @Html.AntiForgeryToken()
         <input type="hidden" asp-for="Id" />
 
         <div class="mb-3">
