@@ -155,5 +155,37 @@ namespace RacingCalendar.Services.Core
 
             return new PaginatedList<RaceViewModel>(items, totalCount, pageIndex, pageSize);
         }
+        public async Task<IEnumerable<RaceViewModel>> GetUpcomingRacesAsync()
+        {
+            return await _context.Races
+                .Where(r => r.Date > DateTime.Now)
+                .OrderBy(r => r.Date)
+                .Select(r => new RaceViewModel
+                {
+                    Id = r.Id,
+                    Name = r.Name,
+                    Date = r.Date,
+                    CircuitName = r.Circuit.Name,
+                    SeriesName = r.Series.Name
+                })
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<RaceViewModel>> GetPastRacesAsync()
+        {
+            return await _context.Races
+                .Where(r => r.Date <= DateTime.Now)
+                .OrderByDescending(r => r.Date)
+                .Select(r => new RaceViewModel
+                {
+                    Id = r.Id,
+                    Name = r.Name,
+                    Date = r.Date,
+                    CircuitName = r.Circuit.Name,
+                    SeriesName = r.Series.Name
+                })
+                .ToListAsync();
+        }
+
     }
 }

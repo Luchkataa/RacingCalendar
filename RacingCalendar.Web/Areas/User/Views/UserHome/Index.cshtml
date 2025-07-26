@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "User Dashboard";
+}
+
+<h2 class="mb-4">Welcome to Racing Calendar</h2>
+
+<div class="d-flex gap-4">
+    <a asp-area="User" asp-controller="Race" asp-action="Upcoming" class="btn btn-outline-primary">
+        View Upcoming Races
+    </a>
+    <a asp-area="User" asp-controller="Race" asp-action="Past" class="btn btn-outline-secondary">
+        View Past Races
+    </a>
+</div>

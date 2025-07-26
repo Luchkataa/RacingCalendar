@@ -1,0 +1,121 @@
+﻿.race-history-container {
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    padding: 2rem 0;
+}
+
+.text-gradient {
+    background: linear-gradient(to right, #e10600, #6c757d);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.race-timeline {
+    position: relative;
+    padding-left: 50px;
+}
+
+    .race-timeline::before {
+        content: '';
+        position: absolute;
+        left: 20px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(to bottom, #e10600, #6c757d);
+    }
+
+.race-item {
+    position: relative;
+    margin-bottom: 30px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .race-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+.race-date {
+    position: absolute;
+    left: -50px;
+    top: 0;
+    width: 40px;
+    text-align: center;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 5px;
+}
+
+.race-day {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #e10600;
+}
+
+.race-month {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: #6c757d;
+}
+
+.race-year {
+    font-size: 0.7rem;
+    color: #adb5bd;
+}
+
+.race-content {
+    margin-left: 20px;
+}
+
+.race-title {
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.race-series {
+    display: inline-block;
+    background-color: #f8f9fa;
+    color: #6c757d;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+
+.race-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.circuit-info {
+    color: #6c757d;
+}
+
+.btn-results {
+    background-color: transparent;
+    color: #e10600;
+    border: 1px solid #e10600;
+    padding: 5px 15px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+    .btn-results:hover {
+        background-color: #e10600;
+        color: white;
+    }
+
+.no-races {
+    background: white;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+}

@@ -14,5 +14,7 @@ namespace RacingCalendar.Services.Core.Contracts
 
         Task<IEnumerable<SelectListItem>> GetSeriesSelectListAsync();
         Task<IEnumerable<SelectListItem>> GetCircuitsSelectListAsync();
+        Task<IEnumerable<RaceViewModel>> GetUpcomingRacesAsync();
+        Task<IEnumerable<RaceViewModel>> GetPastRacesAsync();
     }
 }

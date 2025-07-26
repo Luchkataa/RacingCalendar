@@ -1,0 +1,177 @@
+﻿@model IEnumerable<RacingCalendar.ViewModels.RaceViewModel>
+
+@{
+    ViewData["Title"] = "Past Races";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/past.css" asp-append-version="true" />
+<div class="race-history-container">
+    <div class="container-fluid">
+        <div class="race-header d-flex justify-content-between align-items-center mb-4">
+            <h1 class="display-5 fw-bold text-gradient">Past Races</h1>
+            <div class="race-count-badge">
+                <span class="badge bg-secondary">@Model.Count() races</span>
+            </div>
+        </div>
+
+        @if (!Model.Any())
+        {
+            <div class="no-races text-center py-5">
+                <i class="fas fa-flag-checkered fa-3x mb-3 text-muted"></i>
+                <h3 class="text-muted">No past races found</h3>
+                <p class="text-muted">Check back later for completed race results</p>
+            </div>
+        }
+        else
+        {
+            <div class="race-timeline">
+                @foreach (var race in Model.OrderByDescending(r => r.Date))
+                {
+                    <div class="race-item">
+                        <div class="race-date">
+                            <div class="race-day">@race.Date.ToString("dd")</div>
+                            <div class="race-month">@race.Date.ToString("MMM")</div>
+                            <div class="race-year">@race.Date.ToString("yyyy")</div>
+                        </div>
+                        <div class="race-content">
+                            <div class="race-header">
+                                <h3 class="race-title">@race.Name</h3>
+                                <span class="race-series">@race.SeriesName</span>
+                            </div>
+                            <div class="race-details">
+                                <div class="circuit-info">
+                                    <i class="fas fa-map-marker-alt"></i> @race.CircuitName
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
+
+@* <style>
+    .race-history-container {
+        background-color: #f8f9fa;
+        min-height: 100vh;
+        padding: 2rem 0;
+    }
+
+    .text-gradient {
+        background: linear-gradient(to right, #e10600, #6c757d);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+
+    .race-timeline {
+        position: relative;
+        padding-left: 50px;
+    }
+
+    .race-timeline::before {
+        content: '';
+        position: absolute;
+        left: 20px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(to bottom, #e10600, #6c757d);
+    }
+
+    .race-item {
+        position: relative;
+        margin-bottom: 30px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+        padding: 20px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .race-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .race-date {
+        position: absolute;
+        left: -50px;
+        top: 0;
+        width: 40px;
+        text-align: center;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        padding: 5px;
+    }
+
+    .race-day {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #e10600;
+    }
+
+    .race-month {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        color: #6c757d;
+    }
+
+    .race-year {
+        font-size: 0.7rem;
+        color: #adb5bd;
+    }
+
+    .race-content {
+        margin-left: 20px;
+    }
+
+    .race-title {
+        color: #2c3e50;
+        margin-bottom: 5px;
+    }
+
+    .race-series {
+        display: inline-block;
+        background-color: #f8f9fa;
+        color: #6c757d;
+        padding: 3px 8px;
+        border-radius: 4px;
+        font-size: 0.8rem;
+    }
+
+    .race-details {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+    .circuit-info {
+        color: #6c757d;
+    }
+
+    .btn-results {
+        background-color: transparent;
+        color: #e10600;
+        border: 1px solid #e10600;
+        padding: 5px 15px;
+        border-radius: 20px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-results:hover {
+        background-color: #e10600;
+        color: white;
+    }
+
+    .no-races {
+        background: white;
+        border-radius: 8px;
+        padding: 2rem;
+        box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    }
+</style> *@

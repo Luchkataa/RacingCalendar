@@ -122,9 +122,16 @@ namespace RacingCalendar.Web.Areas.Identity.Pages.Account
                     {
                         return LocalRedirect("/Admin/Home/Index");
                     }
-
-                    return LocalRedirect(returnUrl);
+                    else if (await _userManager.IsInRoleAsync(user, "User"))
+                    {
+                        return LocalRedirect("/User/UserHome/Index");
+                    }
+                    else
+                    {
+                        return LocalRedirect(returnUrl);
+                    }
                 }
+
                 if (result.RequiresTwoFactor)
                 {
                     return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
