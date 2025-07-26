@@ -1,0 +1,84 @@
+﻿@model IEnumerable<RacingCalendar.ViewModels.RaceViewModel>
+
+@{
+    ViewData["Title"] = "Upcoming Races";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/upcoming.css" asp-append-version="true" />
+<div class="upcoming-races-container">
+    <div class="container-fluid">
+        <div class="race-header mb-4">
+            <h1 class="display-5 fw-bold text-gradient">Upcoming Races</h1>
+            <p class="text-muted">Get ready for the next thrilling events</p>
+
+            @if (Model.Any())
+            {
+                var nextRace = Model.OrderBy(r => r.Date).FirstOrDefault();
+                <div class="next-race-notice bg-light p-3 rounded-3 mt-3">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-flag-checkered text-danger fs-3 me-3"></i>
+                        <div>
+                            <strong>Next Race:</strong> @nextRace.Name<br>
+                            <small class="text-muted">@nextRace.Date.ToString("dddd, MMMM d") at @nextRace.Date.ToString("h:mm tt")</small>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        @if (!Model.Any())
+        {
+            <div class="no-races text-center py-5 bg-white rounded-3 shadow-sm">
+                <i class="fas fa-calendar-times fa-3x mb-3 text-muted"></i>
+                <h3 class="text-muted">No upcoming races scheduled</h3>
+                <p class="text-muted">Check back later for new events</p>
+            </div>
+        }
+        else
+        {
+            <div class="row g-4">
+                @foreach (var race in Model.OrderBy(r => r.Date))
+                {
+                    <div class="col-lg-4 col-md-6">
+                        <div class="race-card @(race.Date.Date == DateTime.Today ? "race-today" : "")">
+                            <div class="race-card-header">
+                                <h3 class="race-title">@race.Name</h3>
+                                <span class="race-series">@race.SeriesName</span>
+                                <div class="race-date-text mt-2">
+                                    <i class="fas fa-calendar-day me-2"></i>
+                                    @race.Date.ToString("dddd, MMMM d")
+                                </div>
+                            </div>
+                            <div class="race-card-body">
+                                <div class="race-info">
+                                    <div class="info-item">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <span>@race.CircuitName</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <i class="fas fa-clock"></i>
+                                        <span>@race.Date.ToString("h:mm tt")</span>
+                                    </div>
+                                </div>
+                                <div class="race-actions">
+                                    <button class="btn btn-outline-primary btn-sm">
+                                        <i class="fas fa-calendar-plus"></i> Remind Me
+                                    </button>
+                                </div>
+                            </div>
+                            @if (race.Date.Date == DateTime.Today)
+                            {
+                                <div class="race-live-badge">
+                                    <span class="badge bg-danger">
+                                        <i class="fas fa-bolt"></i> Happening Today!
+                                    </span>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>

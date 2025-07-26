@@ -1,0 +1,95 @@
+﻿.upcoming-races-container {
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    padding: 2rem 0;
+}
+
+.text-gradient {
+    background: linear-gradient(to right, #e10600, #2c3e50);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.next-race-notice {
+    border-left: 4px solid #e10600;
+}
+
+.race-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    position: relative;
+    height: 100%;
+}
+
+    .race-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+    }
+
+.race-card-header {
+    background: linear-gradient(135deg, #2c3e50, #1a1a2e);
+    color: white;
+    padding: 1.5rem;
+}
+
+.race-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.race-series {
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+.race-date-text {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.race-card-body {
+    padding: 1.5rem;
+}
+
+.race-info {
+    margin-bottom: 1.5rem;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+    .info-item i {
+        width: 20px;
+        color: #e10600;
+        margin-right: 10px;
+        text-align: center;
+    }
+
+.race-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.race-today {
+    border: 2px solid #e10600;
+}
+
+.race-live-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.no-races {
+    background: white;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+}
