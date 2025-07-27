@@ -154,5 +154,29 @@ namespace RacingCalendar.Services.Core
                 TotalPages = (int)Math.Ceiling((double)totalDrivers / pageSize)
             };
         }
+        public async Task<TeamDriversViewModel?> GetDriversByTeamAsync(int teamId)
+        {
+            var team = await _context.Teams
+                .Include(t => t.Drivers)
+                .FirstOrDefaultAsync(t => t.Id == teamId);
+
+            if (team == null)
+                return null;
+
+            var drivers = team.Drivers.Select(d => new DriverViewModel
+            {
+                Id = d.Id,
+                FullName = d.FullName,
+                Nationality = d.Nationality,
+                DriverImageUrl = d.DriverImageUrl
+            }).ToList();
+
+            return new TeamDriversViewModel
+            {
+                TeamName = team.Name,
+                Drivers = drivers
+            };
+        }
+
     }
 }

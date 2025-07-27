@@ -17,5 +17,6 @@ namespace RacingCalendar.Services.Core.Contracts
         Task DeleteAsync(int id);
         Task<PaginatedList<DriverViewModel>> GetAllPaginatedAsync(int pageIndex, int pageSize, string? searchTerm = null);
         Task<DriverListViewModel> GetDriversAsync(string? searchTerm, string? sortOrder, int page, int pageSize);
+        Task<TeamDriversViewModel?> GetDriversByTeamAsync(int teamId);
     }
 }

@@ -11,6 +11,6 @@ namespace RacingCalendar.Services.Core.Contracts
         Task UpdateAsync(TeamViewModel vm);
         Task DeleteAsync(int id);
         Task<IEnumerable<SelectListItem>> GetTeamsSelectListAsync();
-        Task<PaginatedList<TeamViewModel>> GetPaginatedTeamsAsync(string searchTerm, int page, int pageSize);
+        Task<PaginatedList<TeamViewModel>> GetPaginatedTeamsAsync(string searchTerm, string sortOrder, int page, int pageSize);
     }
 }

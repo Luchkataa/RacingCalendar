@@ -1,0 +1,67 @@
+﻿@model RacingCalendar.ViewModels.Filters.TeamDriversViewModel
+
+@{
+    ViewData["Title"] = $"{Model.TeamName} Drivers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/team-drivers.css" asp-append-version="true" />
+}
+
+<div class="team-drivers-container">
+    <div class="container">
+        <div class="team-drivers-header mb-4">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="display-5 fw-bold text-gradient">@Model.TeamName</h1>
+                    <p class="text-muted">Team Drivers</p>
+                </div>
+                <a asp-action="Index" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Teams
+                </a>
+            </div>
+        </div>
+
+        @if (!Model.Drivers.Any())
+        {
+            <div class="no-drivers text-center py-5 bg-white rounded-3 shadow-sm">
+                <i class="fas fa-user-slash fa-3x mb-3 text-muted"></i>
+                <h3 class="text-muted">No drivers in this team</h3>
+                <p class="text-muted">This team currently has no assigned drivers</p>
+            </div>
+        }
+        else
+        {
+            <div class="row g-4 justify-content-center">
+                @foreach (var driver in Model.Drivers)
+                {
+                    <div class="col-xl-6 col-lg-8 col-md-10">
+                        <div class="driver-card">
+                            <div class="driver-image-container">
+                                @if (!string.IsNullOrEmpty(driver.DriverImageUrl))
+                                {
+                                    <img src="@driver.DriverImageUrl" alt="@driver.FullName" class="driver-image" />
+                                }
+                                else
+                                {
+                                    <div class="driver-image-placeholder">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                }
+                            </div>
+                            <div class="driver-info">
+                                <h2 class="driver-name">@driver.FullName</h2>
+                                <div class="driver-meta">
+                                    <span class="driver-nationality">
+                                        <i class="fas fa-flag"></i> @driver.Nationality
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>

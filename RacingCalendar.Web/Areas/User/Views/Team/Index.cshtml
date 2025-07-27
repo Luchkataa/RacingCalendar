@@ -1,0 +1,128 @@
+﻿@model RacingCalendar.ViewModels.PaginatedList<RacingCalendar.ViewModels.TeamViewModel>
+
+@{
+    ViewData["Title"] = "All Teams";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/teams.css" asp-append-version="true" />
+}
+
+<div class="teams-container">
+    <div class="container-fluid">
+        <div class="teams-header mb-4">
+            <h1 class="display-5 fw-bold text-gradient">All Teams Racing Across Diferent Motorsports</h1>
+            <p class="text-muted">Discover all constructor teams competing</p>
+        </div>
+
+        <div class="search-filter-container bg-light p-4 rounded-3 mb-4">
+            <form method="get" class="row g-3 align-items-center">
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <span class="input-group-text bg-white">
+                            <i class="fas fa-search"></i>
+                        </span>
+                        <input type="text"
+                               name="searchTerm"
+                               value="@ViewData["CurrentSearch"]"
+                               class="form-control"
+                               placeholder="Search teams by name or country..." />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <select name="sortOrder" class="form-select">
+                        <option value="">Sort by Name (A-Z)</option>
+                        <option value="name_desc" selected="@(ViewData["CurrentSort"]?.ToString() == "name_desc" ? "selected" : null)">Name (Z-A)</option>
+                        <option value="country_asc" selected="@(ViewData["CurrentSort"]?.ToString() == "country_asc" ? "selected" : null)">Country (A-Z)</option>
+                        <option value="country_desc" selected="@(ViewData["CurrentSort"]?.ToString() == "country_desc" ? "selected" : null)">Country (Z-A)</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fas fa-filter me-2"></i>Filter
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        @if (!Model.Items.Any())
+        {
+            <div class="no-teams text-center py-5 bg-white rounded-3 shadow-sm">
+                <i class="fas fa-flag-checkered fa-3x mb-3 text-muted"></i>
+                <h3 class="text-muted">No teams found</h3>
+                <p class="text-muted">Try adjusting your search criteria</p>
+            </div>
+        }
+        else
+        {
+            <div class="row g-4">
+                @foreach (var team in Model.Items)
+                {
+                    <div class="col-xl-3 col-lg-4 col-md-6">
+                        <div class="team-card">
+                            <div class="team-info">
+                                <h3 class="team-name">@team.Name</h3>
+                                <div class="team-meta">
+                                    <span class="team-country">
+                                        <i class="fas fa-map-marker-alt"></i> @team.Country
+                                    </span>
+                                </div>
+                                <div class="team-actions mt-3">
+                                    <a asp-area="User"
+                                       asp-controller="Team"
+                                       asp-action="Drivers"
+                                       asp-route-id="@team.Id"
+                                       class="btn btn-outline-primary btn-sm">
+                                        <i class="fas fa-users me-1"></i> View Drivers
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <nav class="mt-4">
+                <ul class="pagination justify-content-center">
+                    @if (Model.HasPreviousPage)
+                    {
+                        <li class="page-item">
+                            <a class="page-link"
+                               asp-action="Index"
+                               asp-route-page="@(Model.PageIndex - 1)"
+                               asp-route-searchTerm="@ViewData["CurrentSearch"]"
+                               asp-route-sortOrder="@ViewData["CurrentSort"]">
+                                <i class="fas fa-chevron-left"></i>
+                            </a>
+                        </li>
+                    }
+
+                    @for (int i = 1; i <= Model.TotalPages; i++)
+                    {
+                        <li class="page-item @(Model.PageIndex == i ? "active" : "")">
+                            <a class="page-link"
+                               asp-action="Index"
+                               asp-route-page="@i"
+                               asp-route-searchTerm="@ViewData["CurrentSearch"]"
+                               asp-route-sortOrder="@ViewData["CurrentSort"]">@i</a>
+                        </li>
+                    }
+
+                    @if (Model.HasNextPage)
+                    {
+                        <li class="page-item">
+                            <a class="page-link"
+                               asp-action="Index"
+                               asp-route-page="@(Model.PageIndex + 1)"
+                               asp-route-searchTerm="@ViewData["CurrentSearch"]"
+                               asp-route-sortOrder="@ViewData["CurrentSort"]">
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        }
+    </div>
+</div>

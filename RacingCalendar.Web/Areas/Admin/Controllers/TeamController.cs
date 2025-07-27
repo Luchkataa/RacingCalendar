@@ -17,11 +17,12 @@ namespace RacingCalendar.Web.Areas.Admin.Controllers
             _teamService = teamService;
         }
 
-        public async Task<IActionResult> Index(string searchTerm, int page = 1)
+        public async Task<IActionResult> Index(string searchTerm, string sortOrder, int page = 1)
         {
             int pageSize = 10;
-            var teams = await _teamService.GetPaginatedTeamsAsync(searchTerm, page, pageSize);
+            var teams = await _teamService.GetPaginatedTeamsAsync(searchTerm, sortOrder, page, pageSize);
             ViewBag.SearchTerm = searchTerm;
+            ViewBag.SortOrder = sortOrder;
             return View(teams);
         }
 
