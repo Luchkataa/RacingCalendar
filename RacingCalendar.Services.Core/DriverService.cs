@@ -2,7 +2,8 @@
 using RacingCalendar.Data.Models;
 using RacingCalendar.Services.Core.Contracts;
 using RacingCalendar.ViewModels;
-
+using RacingCalendar.ViewModels.Filters;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace RacingCalendar.Services.Core
 {
@@ -107,5 +108,51 @@ namespace RacingCalendar.Services.Core
             return new PaginatedList<DriverViewModel>(items, totalCount, pageIndex, pageSize);
         }
 
+        public async Task<DriverListViewModel> GetDriversAsync(string? searchTerm, string? sortOrder, int page, int pageSize)
+        {
+            var driversQuery = _context.Drivers
+                .Include(d => d.Team)
+                .AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                driversQuery = driversQuery.Where(d =>
+                    d.FullName.Contains(searchTerm) ||
+                    d.Nationality.Contains(searchTerm) ||
+                    (d.Team != null && d.Team.Name.Contains(searchTerm)));
+            }
+
+            driversQuery = sortOrder switch
+            {
+                "name_desc" => driversQuery.OrderByDescending(d => d.FullName),
+                "team_asc" => driversQuery.OrderBy(d => d.Team.Name),
+                "team_desc" => driversQuery.OrderByDescending(d => d.Team.Name),
+                _ => driversQuery.OrderBy(d => d.FullName),
+            };
+
+            var totalDrivers = await driversQuery.CountAsync();
+
+            var drivers = await driversQuery
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .Select(d => new DriverViewModel
+                {
+                    Id = d.Id,
+                    FullName = d.FullName,
+                    Nationality = d.Nationality,
+                    TeamName = d.Team != null ? d.Team.Name : "No Team",
+                    DriverImageUrl = d.DriverImageUrl
+                })
+                .ToListAsync();
+
+            return new DriverListViewModel
+            {
+                Drivers = drivers,
+                SearchTerm = searchTerm,
+                SortOrder = sortOrder,
+                CurrentPage = page,
+                TotalPages = (int)Math.Ceiling((double)totalDrivers / pageSize)
+            };
+        }
     }
 }

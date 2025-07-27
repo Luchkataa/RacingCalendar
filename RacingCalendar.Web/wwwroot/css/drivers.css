@@ -1,0 +1,111 @@
+﻿.drivers-container {
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    padding: 2rem 0;
+}
+
+.text-gradient {
+    background: linear-gradient(to right, #e10600, #2c3e50);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.search-filter-container {
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.driver-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+    .driver-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+    }
+
+.driver-image-container {
+    position: relative;
+    height: 200px;
+    background-color: #f1f1f1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.driver-image {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.driver-image-placeholder {
+    font-size: 5rem;
+    color: #dee2e6;
+}
+
+.driver-number {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(0,0,0,0.7);
+    color: white;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.driver-info {
+    padding: 1.5rem;
+}
+
+.driver-name {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+}
+
+.driver-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 0.9rem;
+}
+
+.driver-nationality, .driver-team {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #6c757d;
+}
+
+.driver-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.no-drivers {
+    background: white;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+}
+
+.page-item.active .page-link {
+    background-color: #e10600;
+    border-color: #e10600;
+}
+
+.page-link {
+    color: #e10600;
+}
+
+    .page-link:hover {
+        color: #c10500;
+    }

@@ -1,4 +1,5 @@
 ﻿using RacingCalendar.ViewModels;
+using RacingCalendar.ViewModels.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,6 @@ namespace RacingCalendar.Services.Core.Contracts
         Task UpdateAsync(DriverViewModel driver);
         Task DeleteAsync(int id);
         Task<PaginatedList<DriverViewModel>> GetAllPaginatedAsync(int pageIndex, int pageSize, string? searchTerm = null);
+        Task<DriverListViewModel> GetDriversAsync(string? searchTerm, string? sortOrder, int page, int pageSize);
     }
 }
