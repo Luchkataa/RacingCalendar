@@ -1,26 +1,119 @@
 ﻿@{
     ViewData["Title"] = "User Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/user-index.css" asp-append-version="true" />
 }
 
-<h2 class="mb-4">Welcome to Racing Calendar</h2>
+<div class="user-dashboard">
+    <div class="dashboard-header text-center mb-5">
+        <h1 class="display-4 fw-bold text-gradient mb-3">Racing Calendar</h1>
+        <p class="lead text-muted">Your ultimate motorsport companion</p>
+    </div>
 
-<div class="d-flex gap-4">
-    <a asp-area="User" asp-controller="Race" asp-action="Upcoming" class="btn btn-outline-primary">
-        View Upcoming Races
-    </a>
-    <a asp-area="User" asp-controller="Race" asp-action="Past" class="btn btn-outline-secondary">
-        View Past Races
-    </a>
-    <a asp-area="User" asp-controller="Drivers" asp-action="Index" class="btn btn-outline-secondary">
-        View All Drivers
-    </a>
-    <a asp-area="User" asp-controller="Team" asp-action="Index" class="btn btn-outline-secondary">
-        View All Teams
-    </a>
-    <a asp-area="User" asp-controller="Series" asp-action="Index" class="btn btn-outline-secondary">
-        View All Series
-    </a>
-    <a asp-area="User" asp-controller="Circuits" asp-action="Index" class="btn btn-outline-secondary">
-        View All Circuits
-    </a>
+    <div class="dashboard-navigation mb-5">
+        <div class="row g-4">
+            <div class="col-md-6">
+                <a asp-area="User" asp-controller="Race" asp-action="Upcoming" class="nav-card featured-card">
+                    <div class="card-icon">
+                        <i class="fas fa-flag-checkered"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Upcoming Races</h3>
+                        <p>See scheduled events</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-6">
+                <a asp-area="User" asp-controller="Race" asp-action="Past" class="nav-card">
+                    <div class="card-icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Past Races</h3>
+                        <p>View completed events</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-4">
+                <a asp-area="User" asp-controller="Drivers" asp-action="Index" class="nav-card">
+                    <div class="card-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Drivers</h3>
+                        <p>Explore competitors</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-4">
+                <a asp-area="User" asp-controller="Team" asp-action="Index" class="nav-card">
+                    <div class="card-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Teams</h3>
+                        <p>Discover squads</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-4">
+                <a asp-area="User" asp-controller="Circuits" asp-action="Index" class="nav-card">
+                    <div class="card-icon">
+                        <i class="fas fa-route"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Circuits</h3>
+                        <p>Browse tracks</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-12">
+                <a asp-area="User" asp-controller="Series" asp-action="Index" class="nav-card">
+                    <div class="card-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Series</h3>
+                        <p>Explore championships</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="stats-summary mt-4">
+        <div class="row g-4">
+            <div class="col-md-3 col-6">
+                <div class="stat-simple-card bg-primary">
+                    <h3>@(ViewBag.TotalCircuits ?? 0)</h3>
+                    <p>Circuits</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="stat-simple-card bg-success">
+                    <h3>@(ViewBag.TotalDrivers ?? 0)</h3>
+                    <p>Drivers</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="stat-simple-card bg-warning">
+                    <h3>@(ViewBag.TotalTeams ?? 0)</h3>
+                    <p>Teams</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="stat-simple-card bg-danger">
+                    <h3>@(ViewBag.UpcomingRaces ?? 0)</h3>
+                    <p>Upcoming Races</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
