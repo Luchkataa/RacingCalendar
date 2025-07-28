@@ -1,0 +1,86 @@
+﻿@model RacingCalendar.ViewModels.Filters.CircuitListViewModel
+@{
+    ViewData["Title"] = "Circuits";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string nameSort = Model.SortOrder == "name" ? "name_desc" : "name";
+}
+
+<link rel="stylesheet" href="~/css/circuits.css" asp-append-version="true" />
+
+<div class="circuit-grid-container">
+    <div class="container-fluid">
+        <div class="circuit-header mb-4">
+            <h1 class="display-6 fw-bold text-gradient">Circuits</h1>
+            <p class="text-muted">Browse tracks used across different motorsports</p>
+        </div>
+
+        <div class="filter-sort-container mb-4">
+            <form method="get" class="row g-2">
+                <div class="col-md-5">
+                    <select name="countryFilter" class="form-select">
+                        <option value="">All Countries</option>
+                        @foreach (var country in Model.CountryOptions)
+                        {
+                            <option value="@country" selected="@(country == Model.CountryFilter ? "selected" : null)">@country</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-5">
+                    <select name="sortOrder" class="form-select">
+                        <option value="">Sort by Name</option>
+                        <option value="name" selected="@(Model.SortOrder == "name" ? "selected" : null)">Name (A-Z)</option>
+                        <option value="name_desc" selected="@(Model.SortOrder == "name_desc" ? "selected" : null)">Name (Z-A)</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fas fa-filter"></i> Apply
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="row g-4">
+            @foreach (var circuit in Model.Circuits.Items)
+            {
+                <div class="col-xl-4 col-lg-6 col-md-6">
+                    <div class="circuit-card">
+                        <div class="circuit-image-container">
+                            @if (!string.IsNullOrWhiteSpace(circuit.LayoutImageUrl))
+                            {
+                                <img src="@circuit.LayoutImageUrl" alt="@circuit.Name layout" class="circuit-image" />
+                            }
+                            else
+                            {
+                                <div class="circuit-image-placeholder">
+                                    <i class="fas fa-route"></i>
+                                </div>
+                            }
+                        </div>
+                        <div class="circuit-body">
+                            <h5 class="circuit-name">@circuit.Name</h5>
+                            <div class="circuit-country">
+                                <i class="fas fa-map-marker-alt text-danger"></i> @circuit.Country
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <nav class="mt-4">
+            <ul class="pagination justify-content-center">
+                @for (int i = 1; i <= Model.Circuits.TotalPages; i++)
+                {
+                    <li class="page-item @(i == Model.Circuits.PageIndex ? "active" : "")">
+                        <a class="page-link"
+                           asp-action="Index"
+                           asp-route-page="@i"
+                           asp-route-countryFilter="@Model.CountryFilter"
+                           asp-route-sortOrder="@Model.SortOrder">@i</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </div>
+</div>

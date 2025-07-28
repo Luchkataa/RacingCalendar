@@ -74,6 +74,7 @@ namespace RacingCalendar.Services.Core
             _context.Circuits.Remove(circuit);
             await _context.SaveChangesAsync();
         }
+
         public async Task<PaginatedList<CircuitViewModel>> GetAllPaginatedAsync(int pageIndex, int pageSize, string? searchTerm = null)
         {
             var query = _context.Circuits.AsQueryable();
@@ -100,6 +101,49 @@ namespace RacingCalendar.Services.Core
             });
 
             return new PaginatedList<CircuitViewModel>(items, totalCount, pageIndex, pageSize);
+        }
+
+        public async Task<PaginatedList<CircuitViewModel>> GetAllFilteredAsync(int pageIndex, int pageSize, string? country = null, string? sortOrder = null)
+        {
+            var query = _context.Circuits.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(country))
+            {
+                query = query.Where(c => c.Country == country);
+            }
+
+            query = sortOrder switch
+            {
+                "name_desc" => query.OrderByDescending(c => c.Name),
+                _ => query.OrderBy(c => c.Name),
+            };
+
+            var totalCount = await query.CountAsync();
+
+            var circuits = await query
+                .Skip((pageIndex - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            var items = circuits.Select(c => new CircuitViewModel
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Country = c.Country,
+                LayoutImageUrl = c.LayoutImageUrl
+            });
+
+            return new PaginatedList<CircuitViewModel>(items, totalCount, pageIndex, pageSize);
+        }
+
+
+        public async Task<List<string>> GetDistinctCountriesAsync()
+        {
+            return await _context.Circuits
+                .Select(c => c.Country)
+                .Distinct()
+                .OrderBy(c => c)
+                .ToListAsync();
         }
     }
 }

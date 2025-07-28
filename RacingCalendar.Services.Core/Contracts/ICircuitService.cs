@@ -1,10 +1,4 @@
-﻿using RacingCalendar.Data.Models;
-using RacingCalendar.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RacingCalendar.ViewModels;
 
 namespace RacingCalendar.Services.Core.Contracts
 {
@@ -16,6 +10,7 @@ namespace RacingCalendar.Services.Core.Contracts
         Task UpdateAsync(CircuitViewModel circuit);
         Task DeleteAsync(int id);
         Task<PaginatedList<CircuitViewModel>> GetAllPaginatedAsync(int pageIndex, int pageSize, string? searchTerm = null);
-
+        Task<PaginatedList<CircuitViewModel>> GetAllFilteredAsync(int pageIndex, int pageSize, string? country = null, string? sortOrder = null);
+        Task<List<string>> GetDistinctCountriesAsync();
     }
 }
