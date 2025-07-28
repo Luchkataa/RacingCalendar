@@ -1,0 +1,39 @@
+﻿@model SeriesViewModel
+@{
+    ViewData["Title"] = "Series Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/series-details.css" asp-append-version="true" />
+}
+
+<div class="series-details-container">
+    <div class="container">
+        <div class="series-details-card">
+            <div class="series-content text-center">
+                <h1 class="series-name mb-4">@Model.Name</h1>
+
+                <div class="series-description mb-5">
+                    @if (!string.IsNullOrWhiteSpace(Model.Description))
+                    {
+                        <p>@Model.Description</p>
+                    }
+                    else
+                    {
+                        <p class="text-muted">No description available</p>
+                    }
+                </div>
+
+                <div class="series-actions d-flex justify-content-center gap-3">
+                    <a asp-action="Index" class="btn btn-outline-primary px-4">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Series
+                    </a>
+                    <a asp-action="Races" asp-route-id="@Model.Id" class="btn btn-primary px-4">
+                        <i class="fas fa-flag-checkered me-2"></i>View Races
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

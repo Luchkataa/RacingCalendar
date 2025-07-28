@@ -1,0 +1,123 @@
+﻿@model RacingCalendar.ViewModels.Filters.SeriesListViewModel
+
+@{
+    ViewData["Title"] = "All Series";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/series.css" asp-append-version="true" />
+}
+
+<div class="series-container">
+    <div class="container-fluid">
+        <div class="series-header mb-4">
+            <h1 class="display-5 fw-bold text-gradient">Racing Series</h1>
+            <p class="text-muted">Explore all racing championships</p>
+        </div>
+
+        <div class="search-filter-container bg-light p-4 rounded-3 mb-4">
+            <form method="get" class="row g-3 align-items-center">
+                <div class="col-md-8">
+                    <div class="input-group">
+                        <span class="input-group-text bg-white">
+                            <i class="fas fa-search"></i>
+                        </span>
+                        <input type="text"
+                               name="searchTerm"
+                               value="@ViewBag.SearchTerm"
+                               class="form-control"
+                               placeholder="Search series by name..." />
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <select name="sortOrder" class="form-select">
+                        <option value="">Sort (A-Z)</option>
+                        <option value="name_desc" selected="@(ViewBag.CurrentSort == "name_desc" ? "selected" : null)">Sort (Z-A)</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fas fa-filter me-2"></i> Filter
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        @if (!Model.Series.Items.Any())
+        {
+            <div class="no-series text-center py-5 bg-white rounded-3 shadow-sm">
+                <i class="fas fa-flag-checkered fa-3x mb-3 text-muted"></i>
+                <h3 class="text-muted">No series found</h3>
+                <p class="text-muted">Try adjusting your search criteria</p>
+            </div>
+        }
+        else
+        {
+            <div class="row g-4">
+                @foreach (var series in Model.Series.Items)
+                {
+                    <div class="col-xl-4 col-lg-6 col-md-6">
+                        <div class="series-card">
+                            <div class="series-info">
+                                <h3 class="series-name">@series.Name</h3>
+                                <p class="series-description">
+                                    @(string.IsNullOrWhiteSpace(series.Description) ? "No description available" : series.Description)
+                                </p>
+                                <div class="series-actions">
+                                    <a asp-action="Details" asp-route-id="@series.Id" class="btn btn-outline-primary">
+                                        <i class="fas fa-info-circle me-1"></i> Details
+                                    </a>
+                                    <a asp-action="Races" asp-route-id="@series.Id" class="btn btn-outline-secondary">
+                                        <i class="fas fa-calendar-alt me-1"></i> Races
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <nav class="mt-4">
+                <ul class="pagination justify-content-center">
+                    @if (Model.Series.HasPreviousPage)
+                    {
+                        <li class="page-item">
+                            <a class="page-link"
+                               asp-action="Index"
+                               asp-route-page="@(Model.Series.PageIndex - 1)"
+                               asp-route-searchTerm="@Model.SearchTerm"
+                               asp-route-sortOrder="@Model.SortOrder">
+                                <i class="fas fa-chevron-left"></i>
+                            </a>
+                        </li>
+                    }
+
+                    @for (int i = 1; i <= Model.Series.TotalPages; i++)
+                    {
+                        <li class="page-item @(i == Model.Series.PageIndex ? "active" : "")">
+                            <a class="page-link"
+                               asp-action="Index"
+                               asp-route-page="@i"
+                               asp-route-searchTerm="@Model.SearchTerm"
+                               asp-route-sortOrder="@Model.SortOrder">@i</a>
+                        </li>
+                    }
+
+                    @if (Model.Series.HasNextPage)
+                    {
+                        <li class="page-item">
+                            <a class="page-link"
+                               asp-action="Index"
+                               asp-route-page="@(Model.Series.PageIndex + 1)"
+                               asp-route-searchTerm="@Model.SearchTerm"
+                               asp-route-sortOrder="@Model.SortOrder">
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        }
+    </div>
+</div>

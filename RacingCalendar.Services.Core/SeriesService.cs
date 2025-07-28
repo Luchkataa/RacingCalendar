@@ -69,7 +69,7 @@ namespace RacingCalendar.Services.Core
             _context.Series.Remove(entity);
             await _context.SaveChangesAsync();
         }
-        public async Task<PaginatedList<SeriesViewModel>> GetPaginatedAsync(string searchTerm, int pageIndex, int pageSize)
+        public async Task<PaginatedList<SeriesViewModel>> GetPaginatedAsync(string? searchTerm,string? sortOrder,int pageIndex,int pageSize)
         {
             var query = _context.Series.AsQueryable();
 
@@ -78,10 +78,15 @@ namespace RacingCalendar.Services.Core
                 query = query.Where(s => s.Name.Contains(searchTerm));
             }
 
+            query = sortOrder switch
+            {
+                "name_desc" => query.OrderByDescending(s => s.Name),
+                _ => query.OrderBy(s => s.Name),
+            };
+
             var totalCount = await query.CountAsync();
 
             var items = await query
-                .OrderBy(s => s.Name)
                 .Skip((pageIndex - 1) * pageSize)
                 .Take(pageSize)
                 .Select(s => new SeriesViewModel
@@ -94,5 +99,21 @@ namespace RacingCalendar.Services.Core
 
             return new PaginatedList<SeriesViewModel>(items, totalCount, pageIndex, pageSize);
         }
+        public async Task<IEnumerable<RaceViewModel>> GetRacesBySeriesIdAsync(int seriesId)
+        {
+            var races = await _context.Races
+                .Where(r => r.SeriesId == seriesId)
+                .Include(r => r.Circuit)
+                .ToListAsync();
+
+            return races.Select(r => new RaceViewModel
+            {
+                Id = r.Id,
+                Date = r.Date,
+                CircuitName = r.Circuit.Name,
+                SeriesId = r.SeriesId
+            });
+        }
+
     }
 }

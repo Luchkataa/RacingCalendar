@@ -1,0 +1,60 @@
+﻿@model IEnumerable<RaceViewModel>
+@{
+    ViewData["Title"] = "Races in Series";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/series-races.css" asp-append-version="true" />
+}
+<div class="races-in-series-container">
+    <div class="container">
+        <div class="races-header mb-4">
+            <h1 class="display-5 fw-bold text-gradient">Races in Series</h1>
+            <p class="text-muted">Upcoming and past events</p>
+        </div>
+
+        @if (!Model.Any())
+        {
+            <div class="no-races alert bg-light border rounded-3 p-4 text-center">
+                <i class="fas fa-flag-checkered fa-2x mb-3 text-warning"></i>
+                <h4 class="text-warning">No races scheduled</h4>
+                <p class="text-muted">Check back later for updates</p>
+            </div>
+        }
+        else
+        {
+            <div class="races-table-container">
+                <table class="table races-table">
+                    <thead class="races-table-header">
+                        <tr>
+                            <th class="ps-4">Date</th>
+                            <th>Circuit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var race in Model)
+                        {
+                            <tr class="race-row">
+                                <td class="ps-4">
+                                    <div class="race-date">
+                                        <span class="race-day">@race.Date.ToString("dd")</span>
+                                        <span class="race-month">@race.Date.ToString("MMM")</span>
+                                        <span class="race-year">@race.Date.ToString("yyyy")</span>
+                                    </div>
+                                </td>
+                                <td class="circuit-name">@race.CircuitName</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+
+        <div class="text-center mt-4">
+            <a asp-action="Index" class="btn btn-outline-primary px-4">
+                <i class="fas fa-arrow-left me-2"></i>Back to Series
+            </a>
+        </div>
+    </div>
+</div>
