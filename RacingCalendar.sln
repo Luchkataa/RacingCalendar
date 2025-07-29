@@ -19,6 +19,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RacingCalendar.Data", "Raci
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RacingCalendar.Data.Models", "RacingCalendar.Data.Models\RacingCalendar.Data.Models.csproj", "{00F255B9-C2E9-408E-BF06-F32655DA4803}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RacingCalendar.Tests", "RacingCalendar.Tests\RacingCalendar.Tests.csproj", "{C091BFBB-5A21-42FB-881F-294876943CA1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,10 @@ Global
 		{00F255B9-C2E9-408E-BF06-F32655DA4803}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00F255B9-C2E9-408E-BF06-F32655DA4803}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00F255B9-C2E9-408E-BF06-F32655DA4803}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C091BFBB-5A21-42FB-881F-294876943CA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C091BFBB-5A21-42FB-881F-294876943CA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C091BFBB-5A21-42FB-881F-294876943CA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C091BFBB-5A21-42FB-881F-294876943CA1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +63,7 @@ Global
 		{376676B6-F708-432E-AAF7-0495F06D83AB} = {30EFA65C-4340-4DEC-B352-7F2166FE379B}
 		{6F9CD34E-07DD-48CA-8DB0-957997169D53} = {C77A268A-3C5F-4A55-B222-163728389BDA}
 		{00F255B9-C2E9-408E-BF06-F32655DA4803} = {C77A268A-3C5F-4A55-B222-163728389BDA}
+		{C091BFBB-5A21-42FB-881F-294876943CA1} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1AEBDA75-1A32-49CC-85A6-A336C91177AA}

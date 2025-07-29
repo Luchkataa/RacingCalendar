@@ -81,7 +81,10 @@ namespace RacingCalendar.Services.Core
 
             if (!string.IsNullOrWhiteSpace(searchTerm))
             {
-                query = query.Where(c => c.Name.Contains(searchTerm) || c.Country.Contains(searchTerm));
+                var lowerTerm = searchTerm.ToLower();
+                query = query.Where(c =>
+                    c.Name.ToLower().Contains(lowerTerm) ||
+                    c.Country.ToLower().Contains(lowerTerm));
             }
 
             var totalCount = await query.CountAsync();
