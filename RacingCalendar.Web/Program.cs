@@ -5,7 +5,6 @@ using RacingCalendar.Services.Core.Contracts;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ICircuitService, CircuitService>();
 builder.Services.AddScoped<ISeriesService, SeriesService>();

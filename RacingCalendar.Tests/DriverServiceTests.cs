@@ -193,7 +193,7 @@ public class DriverServiceTests
         var result = await service.GetAllPaginatedAsync(2, 3);
 
         Assert.Equal(3, result.Items.Count());
-        Assert.Equal(4, result.TotalPages); // 10 / 3 = 3.33 => 4 pages
+        Assert.Equal(4, result.TotalPages);
         Assert.Equal(2, result.PageIndex);
     }
 
