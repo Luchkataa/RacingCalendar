@@ -277,4 +277,47 @@ public class CircuitServiceTests
             Assert.Equal(new List<string> { "Germany", "Italy" }, countries);
         }
     }
+    [Fact]
+    public async Task GetByIdAsync_ReturnsNull_WhenNotExists()
+    {
+        var options = GetDbOptions();
+        using var context = new RacingCalendarDbContext(options);
+        var service = new CircuitService(context);
+
+        var result = await service.GetByIdAsync(999);
+
+        Assert.Null(result);
+    }
+
+    [Fact]
+    public async Task UpdateAsync_DoesNothing_WhenCircuitNotExists()
+    {
+        var options = GetDbOptions();
+        using var context = new RacingCalendarDbContext(options);
+        var service = new CircuitService(context);
+
+        var vm = new CircuitViewModel
+        {
+            Id = 999,
+            Name = "NonExistent",
+            Country = "Nowhere",
+            LayoutImageUrl = "none.png"
+        };
+
+        await service.UpdateAsync(vm);
+
+        Assert.Empty(context.Circuits);
+    }
+
+    [Fact]
+    public async Task DeleteAsync_DoesNothing_WhenCircuitNotExists()
+    {
+        var options = GetDbOptions();
+        using var context = new RacingCalendarDbContext(options);
+        var service = new CircuitService(context);
+
+        await service.DeleteAsync(999);
+
+        Assert.Empty(context.Circuits);
+    }
 }
